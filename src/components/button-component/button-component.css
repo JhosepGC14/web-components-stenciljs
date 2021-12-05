@@ -1,0 +1,46 @@
+:host {
+  display: block;
+}
+
+button {
+  border: none;
+  box-shadow: none;
+  background: #3176D8;
+  border-radius: 8px;
+  padding: 20px 20px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #fff;
+  width: 100%;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  button {
+    padding: 16px 32px;
+  }
+}
+
+button:hover {
+  filter: drop-shadow(0 4px 10px rgba(239, 51, 64, 0.24));
+}
+
+button:focus {
+  border: none;
+  box-shadow: none;
+  filter: drop-shadow(0 4px 10px rgba(239, 51, 64, 0.24));
+}
+
+button:disabled {
+  background: #e3e6fa;
+  filter: none;
+  color: #a9afd9;
+  border: none;
+  box-shadow: none;
+}
