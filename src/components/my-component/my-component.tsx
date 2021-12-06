@@ -1,5 +1,6 @@
-import { Component, Prop, h } from '@stencil/core';
-import { format } from '../../utils/utils';
+import { Component, h, State } from '@stencil/core';
+import { Country } from '../../interfaces/country.interface';
+import { DataController } from '../../utils/services/DataServices';
 
 @Component({
   tag: 'my-component',
@@ -7,26 +8,38 @@ import { format } from '../../utils/utils';
   shadow: true,
 })
 export class MyComponent {
-  /**
-   * The first name
-   */
-  @Prop() first: string;
+  @State() data: Country[] = [];
+  dataServices = new DataController();
 
-  /**
-   * The middle name
-   */
-  @Prop() middle: string;
-
-  /**
-   * The last name
-   */
-  @Prop() last: string;
-
-  private getText(): string {
-    return format(this.first, this.middle, this.last);
+  componentWillLoad() {
+    console.log('componentWillLoad');
+    this.dataServices.getAllCountries().then(e => {
+      this.data = e;
+    });
   }
 
   render() {
-    return <div>Hello, World! I'm {this.getText()}</div>;
+    return (
+      <div class="wrapper">
+        <div class="container">
+          {this.data &&
+            this.data.length > 0 &&
+            this.data.map((item) => {
+              return (
+                <div class="card">
+                  <div class="card-image">
+                    <img src={item.flags.svg} />
+                    <span class="card-title">{item.name.official}</span>
+                  </div>
+                  <div class="card-content">
+                    <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+        <button-component content="Siguiente"></button-component>
+      </div>
+    );
   }
 }
